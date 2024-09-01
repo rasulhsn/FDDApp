@@ -1,4 +1,4 @@
-﻿namespace AccountsWebApp.Core.Accounts.EventModels
+﻿namespace WebApp.Core.Accounts.EventModels
 {
     public class MoneyDeposited
     {

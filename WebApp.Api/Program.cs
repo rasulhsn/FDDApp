@@ -1,4 +1,4 @@
-using AccountsWebApp.Core;
+using WebApp.Core;
 using Carter;
 
 var builder = WebApplication.CreateBuilder(args);

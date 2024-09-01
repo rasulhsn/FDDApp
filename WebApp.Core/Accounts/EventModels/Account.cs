@@ -1,6 +1,5 @@
-﻿using WebApp.Core.Accounts.EventModels;
-
-namespace AccountsWebApp.Core.Accounts.EventModels
+﻿
+namespace WebApp.Core.Accounts.EventModels
 {
     public class Account
     {

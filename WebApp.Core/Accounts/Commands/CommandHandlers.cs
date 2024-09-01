@@ -1,9 +1,8 @@
-﻿using AccountsWebApp.Core.Accounts.EventModels;
+﻿using WebApp.Core.Accounts.EventModels;
 using Marten;
 using MediatR;
-using WebApp.Core.Accounts.EventModels;
 
-namespace AccountsWebApp.Core.Accounts.Commands
+namespace WebApp.Core.Accounts.Commands
 {
     public class CommandHandlers : IRequestHandler<CreateAccountCommand, CreateAccountResponse>,
                                     IRequestHandler<DeleteAccountCommand, DeleteAccountResponse>

@@ -1,10 +1,9 @@
-﻿using AccountsWebApp.Core.Accounts.EventModels;
+﻿using WebApp.Core.Accounts.EventModels;
 using Marten;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebApp.Core.Accounts.EventModels;
 
-namespace AccountsWebApp.Core
+namespace WebApp.Core
 {
     public static class DIExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace AccountsWebApp.Core.Accounts.Queries
+namespace WebApp.Core.Accounts.Queries
 {
     public record GetAccountResponse(string NameSurname, decimal CurrentBalance);
     public record GetAccountQuery(Guid AccountId) : IRequest<GetAccountResponse>;

@@ -1,9 +1,9 @@
-﻿using AccountsWebApp.Core.Accounts.Commands;
-using AccountsWebApp.Core.Accounts.Queries;
+﻿using WebApp.Core.Accounts.Commands;
+using WebApp.Core.Accounts.Queries;
 using Carter;
 using MediatR;
 
-namespace AccountsWeb.Api.Features.Accounts
+namespace WebApp.Api.Features.Accounts
 {
     public class AccountEndpoints : CarterModule
     {

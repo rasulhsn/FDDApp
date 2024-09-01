@@ -1,7 +1,6 @@
-﻿using AccountsWebApp.Core.Accounts.EventModels;
-using AccountsWebApp.Core.Accounts.Queries;
-using Marten;
+﻿using Marten;
 using MediatR;
+using WebApp.Core.Accounts.EventModels;
 
 namespace WebApp.Core.Accounts.Queries
 {
