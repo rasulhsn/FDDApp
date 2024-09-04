@@ -15,7 +15,7 @@ namespace WebApp.Core.Accounts.Queries
 
         public async Task<GetAccountResponse> Handle(GetAccountQuery request, CancellationToken cancellationToken)
         {
-            var loadedAccount = await _dbSession.Events.AggregateStreamAsync<Account>(request.AccountId);
+            var loadedAccount = await _dbSession.Events.AggregateStreamAsync<AccountEventModel>(request.AccountId);
 
             if (loadedAccount == null)
             {

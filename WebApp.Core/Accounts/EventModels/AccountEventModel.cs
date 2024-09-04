@@ -1,18 +1,18 @@
 ﻿
 namespace WebApp.Core.Accounts.EventModels
 {
-    public class Account
+    public class AccountEventModel
     {
         public Guid Id { get; private set; }
         public string Owner { get; private set; }
         public decimal Balance { get; private set; }
         public bool IsDeleted { get; private set; }
 
-        public Account() { }
+        public AccountEventModel() { }
 
-        public Account(Guid id, string owner, decimal initialBalance)
+        public AccountEventModel(Guid id, string owner, decimal initialBalance)
         {
-            Apply(new AccountCreated
+            Apply(new AccountCreatedEventModel
             {
                 AccountId = id,
                 Owner = owner,
@@ -28,7 +28,7 @@ namespace WebApp.Core.Accounts.EventModels
                 throw new InvalidOperationException("Cannot operate on a deleted account.");
             }
 
-            Apply(new AccountDeleted() { AccountId = Id });
+            Apply(new AccountDeletedEventModel() { AccountId = Id });
         }
 
         public void Deposit(decimal amount)
@@ -38,7 +38,7 @@ namespace WebApp.Core.Accounts.EventModels
                 throw new InvalidOperationException("Cannot operate on a deleted account.");
             }
 
-            Apply(new MoneyDeposited
+            Apply(new MoneyDepositedEventModel
             {
                 AccountId = Id,
                 Amount = amount
@@ -57,7 +57,7 @@ namespace WebApp.Core.Accounts.EventModels
                 throw new InvalidOperationException("Insufficient funds.");
             }
 
-            Apply(new MoneyWithdrawn
+            Apply(new MoneyWithdrawnEventModel
             {
                 AccountId = Id,
                 Amount = amount
@@ -68,19 +68,19 @@ namespace WebApp.Core.Accounts.EventModels
         {
             switch (@event)
             {
-                case AccountCreated e:
+                case AccountCreatedEventModel e:
                     Id = e.AccountId;
                     Owner = e.Owner;
                     Balance = e.InitialBalance;
                     IsDeleted = e.IsDeleted;
                     break;
-                case AccountDeleted e:
+                case AccountDeletedEventModel e:
                     IsDeleted = true;
                     break;
-                case MoneyDeposited e:
+                case MoneyDepositedEventModel e:
                     Balance += e.Amount;
                     break;
-                case MoneyWithdrawn e:
+                case MoneyWithdrawnEventModel e:
                     Balance -= e.Amount;
                     break;  
             }

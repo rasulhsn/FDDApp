@@ -32,6 +32,19 @@ namespace WebApp.Api.Features.Accounts
 
             //});
 
+            app.MapPut("api/v1/accounts/deposit", async (MoneyDepositedAccountCommand depositAmount, IMediator mediator) =>
+            {
+                try
+                {
+                    var result = await mediator.Send(depositAmount);
+                    return Results.Ok(result);
+                }
+                catch (Exception ex)
+                {
+                    return Results.Conflict(ex);
+                }
+            });
+
             app.MapPost("api/v1/accounts", async (CreateAccountCommand account, IMediator mediator) =>
             {
                 try

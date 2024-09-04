@@ -1,6 +1,6 @@
 ﻿namespace WebApp.Core.Accounts.EventModels
 {
-    public class AccountCreated
+    public class AccountCreatedEventModel
     {
         public Guid AccountId { get; set; }
         public string Owner { get; set; }

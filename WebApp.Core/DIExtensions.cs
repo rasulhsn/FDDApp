@@ -20,10 +20,10 @@ namespace WebApp.Core
                 string connectionStr = configuration["DefaultConnectionString"];
                 opts.Connection(connectionStr);
 
-                opts.Events.AddEventType(typeof(AccountCreated));
-                opts.Events.AddEventType(typeof(AccountDeleted));
-                opts.Events.AddEventType(typeof(MoneyDeposited));
-                opts.Events.AddEventType(typeof(MoneyWithdrawn));
+                opts.Events.AddEventType(typeof(AccountCreatedEventModel));
+                opts.Events.AddEventType(typeof(AccountDeletedEventModel));
+                opts.Events.AddEventType(typeof(MoneyDepositedEventModel));
+                opts.Events.AddEventType(typeof(MoneyWithdrawnEventModel));
             });
 
             return services;

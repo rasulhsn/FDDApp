@@ -2,7 +2,7 @@
 
 namespace WebApp.Core.Accounts.EventModels
 {
-    public class AccountDeleted
+    public class AccountDeletedEventModel
     {
         public Guid AccountId { get; set; }
     }

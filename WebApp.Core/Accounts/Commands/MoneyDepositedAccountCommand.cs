@@ -2,6 +2,6 @@
 
 namespace WebApp.Core.Accounts.Commands
 {
-    public record MoneyWithDrawnAccountResponse();
-    public record MoneyWithDrawnAccountCommand() : IRequest<MoneyWithDrawnAccountResponse>;
+    public record MoneyDepositedAccountResponse(bool isSuccess);
+    public record MoneyDepositedAccountCommand(Guid AccountId, decimal Amount) : IRequest<MoneyDepositedAccountResponse>;
 }
