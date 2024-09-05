@@ -2,6 +2,9 @@
 using Marten;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebApp.Core.Accounts.ProjectionModels;
+using Marten.Events.Projections;
+using Marten.Events.Daemon.Resiliency;
 
 namespace WebApp.Core
 {
@@ -24,7 +27,9 @@ namespace WebApp.Core
                 opts.Events.AddEventType(typeof(AccountDeletedEventModel));
                 opts.Events.AddEventType(typeof(MoneyDepositedEventModel));
                 opts.Events.AddEventType(typeof(MoneyWithdrawnEventModel));
-            });
+
+                opts.Projections.Add<AccountProjection>(ProjectionLifecycle.Async);
+            }).AddAsyncDaemon(DaemonMode.Solo);
 
             return services;
         }

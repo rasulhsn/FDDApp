@@ -3,10 +3,10 @@ namespace WebApp.Core.Accounts.EventModels
 {
     public class AccountEventModel
     {
-        public Guid Id { get; private set; }
-        public string Owner { get; private set; }
-        public decimal Balance { get; private set; }
-        public bool IsDeleted { get; private set; }
+        public Guid Id { get;  set; }
+        public string Owner { get;  set; }
+        public decimal Balance { get; set; }
+        public bool IsDeleted { get; set; }
 
         public AccountEventModel() { }
 

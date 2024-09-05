@@ -6,23 +6,20 @@ namespace WebApp.Core.Accounts.Queries
 {
     public class QueryHandlers : IRequestHandler<GetAccountQuery, GetAccountResponse>
     {
-        private readonly IDocumentSession _dbSession;
+        private readonly IDocumentStore _documentStore;
 
-        public QueryHandlers(IDocumentSession dbSession)
+        public QueryHandlers(IDocumentStore documentStore)
         {
-            _dbSession = dbSession;
+            _documentStore = documentStore;
         }
 
         public async Task<GetAccountResponse> Handle(GetAccountQuery request, CancellationToken cancellationToken)
         {
-            var loadedAccount = await _dbSession.Events.AggregateStreamAsync<AccountEventModel>(request.AccountId);
+            await using var session = _documentStore.QuerySession();
+            
+            var account = await session.LoadAsync<AccountEventModel>(request.AccountId);
 
-            if (loadedAccount == null)
-            {
-                return null;
-            }
-
-            return new GetAccountResponse(loadedAccount.Owner, loadedAccount.Balance);
+            return new GetAccountResponse(account.Owner, account.Balance);
         }
     }
 }
