@@ -17,7 +17,7 @@ namespace WebApp.Core.Accounts.Queries
         {
             await using var session = _documentStore.QuerySession();
             
-            var account = await session.LoadAsync<AccountEventModel>(request.AccountId);
+            var account = await session.LoadAsync<AccountModel>(request.AccountId);
 
             return new GetAccountResponse(account.Owner, account.Balance);
         }

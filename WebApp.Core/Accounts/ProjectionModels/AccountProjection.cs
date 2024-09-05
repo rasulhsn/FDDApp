@@ -3,28 +3,33 @@ using WebApp.Core.Accounts.EventModels;
 
 namespace WebApp.Core.Accounts.ProjectionModels
 {
-    public class AccountProjection : SingleStreamProjection<AccountEventModel>
+    public class AccountProjection : SingleStreamProjection<AccountModel>
     {
-        public static AccountEventModel Create(AccountCreatedEventModel accountCreated)
+        public static AccountModel Create(AccountCreatedEventModel accountCreated)
         {
-            return new AccountEventModel(accountCreated.AccountId,
-                                          accountCreated.Owner,
-                                          accountCreated.InitialBalance);
+            var accountModel = new AccountModel();
+            accountCreated.Apply(accountModel);
+            return accountModel;
         }
 
-        public void Apply(AccountDeletedEventModel accountDeleted, AccountEventModel account)
+        public void Apply(AccountDeletedEventModel accountDeleted, AccountModel account)
         {
-            account.Delete();
+            accountDeleted.Apply(account);
         }
 
-        public void Apply(MoneyDepositedEventModel moneyDeposited, AccountEventModel account)
+        public void Apply(MoneyDepositedEventModel moneyDeposited, AccountModel account)
         {
-            account.Deposit(moneyDeposited.Amount);
+            moneyDeposited.Apply(account);
         }
 
-        public void Apply(MoneyWithdrawnEventModel moneyWithdrawn, AccountEventModel account)
+        public void Apply(MoneyWithdrawnEventModel moneyWithdrawn, AccountModel account)
         {
-            account.Withdraw(moneyWithdrawn.Amount);
+            moneyWithdrawn.Apply(account);
+        }
+
+        public void Apply(AccountBlockedEventModel blockedEventModel, AccountModel account)
+        {
+            blockedEventModel.Apply(account);
         }
     }
 }

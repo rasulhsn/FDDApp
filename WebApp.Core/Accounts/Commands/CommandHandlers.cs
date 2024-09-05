@@ -20,7 +20,7 @@ namespace WebApp.Core.Accounts.Commands
         {
             var newAccountId = Guid.NewGuid();
 
-            _dbSession.Events.StartStream<AccountEventModel>(newAccountId, new AccountCreatedEventModel
+            _dbSession.Events.StartStream<AccountModel>(newAccountId, new AccountCreatedEventModel
             {
                 AccountId = newAccountId,
                 Owner = request.NameSurname,
@@ -35,16 +35,16 @@ namespace WebApp.Core.Accounts.Commands
         public async Task<DeleteAccountResponse> Handle(DeleteAccountCommand request,
                             CancellationToken cancellationToken)
         {
-            var account = await _dbSession.Events.AggregateStreamAsync<AccountEventModel>(request.Id);
+            var account = await _dbSession.Events.AggregateStreamAsync<AccountModel>(request.Id);
 
             if (account == null || account.IsDeleted)
             {
                 return new DeleteAccountResponse(false);
             }
 
-            account.Delete();
+            var deleteEvent = new AccountDeletedEventModel { AccountId = account.Id };
 
-            _dbSession.Events.Append(account.Id, new AccountDeletedEventModel { AccountId = account.Id });
+            _dbSession.Events.Append(account.Id, deleteEvent);
 
             await _dbSession.SaveChangesAsync();
 
@@ -54,7 +54,7 @@ namespace WebApp.Core.Accounts.Commands
         public async Task<MoneyDepositedAccountResponse> Handle(MoneyDepositedAccountCommand request,
                                                                 CancellationToken cancellationToken)
         {
-            var account = await _dbSession.Events.AggregateStreamAsync<AccountEventModel>(request.AccountId);
+            var account = await _dbSession.Events.AggregateStreamAsync<AccountModel>(request.AccountId);
 
             if (account == null || account.IsDeleted)
             {

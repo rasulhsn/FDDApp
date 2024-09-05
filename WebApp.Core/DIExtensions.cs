@@ -27,6 +27,7 @@ namespace WebApp.Core
                 opts.Events.AddEventType(typeof(AccountDeletedEventModel));
                 opts.Events.AddEventType(typeof(MoneyDepositedEventModel));
                 opts.Events.AddEventType(typeof(MoneyWithdrawnEventModel));
+                opts.Events.AddEventType(typeof(AccountBlockedEventModel));
 
                 opts.Projections.Add<AccountProjection>(ProjectionLifecycle.Async);
             }).AddAsyncDaemon(DaemonMode.Solo);
