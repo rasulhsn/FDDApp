@@ -29,7 +29,7 @@ namespace WebApp.Core
                 opts.Events.AddEventType(typeof(MoneyWithdrawnEventModel));
                 opts.Events.AddEventType(typeof(AccountBlockedEventModel));
 
-                opts.Projections.Add<AccountProjection>(ProjectionLifecycle.Async);
+                opts.Projections.Add<AccountProjection>(ProjectionLifecycle.Inline);
             }).AddAsyncDaemon(DaemonMode.Solo);
 
             return services;

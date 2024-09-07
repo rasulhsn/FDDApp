@@ -9,10 +9,18 @@ namespace WebApp.Api.Features.Accounts
     {
         public override void AddRoutes(IEndpointRouteBuilder app)
         {
-            //app.MapGet("api/v1/accounts", async (IMediator mediator) =>
-            //{
-
-            //});
+            app.MapGet("api/v1/accounts", async (IMediator mediator) =>
+            {
+                try
+                {
+                    var result = await mediator.Send(new GetAllAccountQuery());
+                    return Results.Ok(result);
+                }
+                catch (Exception ex)
+                {
+                    return Results.Conflict(ex);
+                }
+            });
 
             app.MapGet("api/v1/accounts/{id:guid}", async (Guid id, IMediator mediator) =>
             {

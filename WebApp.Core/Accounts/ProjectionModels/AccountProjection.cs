@@ -5,6 +5,11 @@ namespace WebApp.Core.Accounts.ProjectionModels
 {
     public class AccountProjection : SingleStreamProjection<AccountModel>
     {
+        public AccountProjection()
+        {
+            //DeleteEvent<AccountDeletedEventModel>();
+        }
+
         public static AccountModel Create(AccountCreatedEventModel accountCreated)
         {
             var accountModel = new AccountModel();
