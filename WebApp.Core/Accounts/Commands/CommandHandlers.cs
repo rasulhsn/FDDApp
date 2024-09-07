@@ -25,6 +25,7 @@ namespace WebApp.Core.Accounts.Commands
                 AccountId = newAccountId,
                 Owner = request.NameSurname,
                 InitialBalance = request.InitialMoney,
+                Status = AccountStatus.Active,
             });
 
             await _dbSession.SaveChangesAsync();

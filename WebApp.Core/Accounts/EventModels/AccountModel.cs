@@ -11,11 +11,12 @@ namespace WebApp.Core.Accounts.EventModels
 
         public AccountModel() { }
 
-        public AccountModel(Guid id, string owner, decimal initialBalance)
+        public AccountModel(Guid id, string owner, AccountStatus accountStatus, decimal initialBalance)
         {
             Id = id;
             Owner = owner;
             Balance = initialBalance;
+            Status = accountStatus;
             IsDeleted = false;
         }
 
